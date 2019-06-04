@@ -20,7 +20,7 @@ public class VentanaJuego extends JFrame {
 		eventos();
 		c = new Controlador();
 		this.setTitle("Bubble Ships");
-		this.setSize(300,500);
+		this.setSize(800,600);
 		this.setVisible(true);
 	}
 
@@ -35,9 +35,11 @@ public class VentanaJuego extends JFrame {
 		Container c = this.getContentPane();
 		c.setLayout(null);
 		c.setBackground(Color.WHITE);
+		
+		//cañon
 		canon = new JLabel();
-		canon.setIcon(new ImageIcon("imagenes\\imagenCanon.jpg"));
-		canon.setBounds(250, 300, 300, 300);
+		canon.setIcon(new ImageIcon("imagenes\\canonSF.png"));
+		canon.setBounds(338, 468, 112, 112);
 		c.add(canon);
 	}
 }
