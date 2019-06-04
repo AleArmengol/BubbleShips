@@ -36,7 +36,7 @@ public class VentanaJuego extends JFrame {
 		c.setLayout(null);
 		c.setBackground(Color.WHITE);
 		canon = new JLabel();
-		canon.setIcon(new ImageIcon("C:\\Users\\aearm\\Documents\\GitHub\\BubbleShips\\imagenes\\imagenCanon.jpg"));
+		canon.setIcon(new ImageIcon("imagenes\\imagenCanon.jpg"));
 		canon.setBounds(250, 300, 300, 300);
 		c.add(canon);
 	}
