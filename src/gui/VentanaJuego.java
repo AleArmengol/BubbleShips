@@ -25,7 +25,7 @@ public class VentanaJuego extends JFrame {
 	
 	public VentanaJuego() {
 		lblEnemigos = new ArrayList<JLabel>();
-		cont = new Controlador();
+		cont = new Controlador();//genera todo lo del controlador
 		configurar();
 		eventos();
 		this.setTitle("Bubble Ships");
