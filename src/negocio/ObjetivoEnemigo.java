@@ -20,12 +20,12 @@ public class ObjetivoEnemigo {
 			vel = -1 * factor * nivel; // el enemigo recorre la pantalla de derecha a izquierda
 			posX = 850;
 			posY = 50;
-			pathImagen = "imagenes\\shipBack.png";
+			pathImagen = "imagenes\\veleroBack.gif";
 		} else {
 			vel = factor * nivel; // el enemigo recorre la pantalla de izquierda a derecha
 			posX = -250;
 			posY = 200;
-			pathImagen = "imagenes\\ship.png";
+			pathImagen = "imagenes\\velero.gif";
 		}
 	}
 	

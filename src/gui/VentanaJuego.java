@@ -46,7 +46,7 @@ public class VentanaJuego extends JFrame {
 		// TODO Auto-generated method stub
 		Container c = this.getContentPane();
 		c.setLayout(null);
-		c.setBackground(Color.WHITE);
+		c.setBackground(new Color(111,208,206));
 		
 		//cañon
 		canon = new JLabel();
@@ -67,7 +67,7 @@ public class VentanaJuego extends JFrame {
 			String pathTemp = iteradorPath.next();
 			lblAct.setIcon(new ImageIcon(pathTemp));
 			
-			if(pathTemp.equals("imagenes\\ship.png")) {
+			if(pathTemp.equals("imagenes\\velero.gif")) {
 				lblAct.setBounds(cont.getPosXs().get(iteradorPos), 200, 200, 200);
 				
 			} else {
