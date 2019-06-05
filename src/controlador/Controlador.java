@@ -25,7 +25,7 @@ public class Controlador {
 		paths = new ArrayList<String>();
 		posXs = new ArrayList<Integer>();
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 10; i++) { //creo los 10 enemigos
 			ObjetivoEnemigo temp = new ObjetivoEnemigo(juegoAct.getNivelAct());
 			enemigos.add(temp);
 			paths.add(temp.getPathImagen());
@@ -63,7 +63,7 @@ public class Controlador {
 
 	public ArrayList<ArrayList<Integer>> obtenerEstadoJuego() {
 		ArrayList<Integer> posActEn = new ArrayList<>(); //pos actuales enemigos
-		ArrayList<ArrayList<Integer>> devolver = new ArrayList<>();
+		ArrayList<ArrayList<Integer>> devolver = new ArrayList<>(); //contiene la posicion de: Enemigos(Eje x),proyectil(x,y) y puntaje
 		
 		Iterator<ObjetivoEnemigo> iterador = enemigos.iterator();
 		while (iterador.hasNext()) {
