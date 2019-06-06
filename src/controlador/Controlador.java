@@ -17,7 +17,6 @@ public class Controlador {
 
 
 	private Juego juegoAct;
-	private int segCount = 0;
 
 	public Controlador() {
 		enemigos = new ArrayList<ObjetivoEnemigo>();
