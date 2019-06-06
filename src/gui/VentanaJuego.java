@@ -29,7 +29,7 @@ public class VentanaJuego extends JFrame {
 		eventos();
 		this.setTitle("Bubble Ships");
 		this.setSize(800,600);
-		this.setResizable(false);
+		//this.setResizable(false);
 		this.setVisible(true);
 	}
 
@@ -57,7 +57,7 @@ public class VentanaJuego extends JFrame {
 
 		
 		//enemigos
-		Iterator<String> iteradorPath = cont.getPaths().iterator();
+		Iterator<String> iteradorPath = cont.obtenerPaths().iterator();
 		int iteradorPos = 0;
 		while(iteradorPath.hasNext()) {
 			JLabel lblAct = new JLabel();
@@ -65,10 +65,10 @@ public class VentanaJuego extends JFrame {
 			lblAct.setIcon(new ImageIcon(pathTemp));
 			
 			if(pathTemp.equals("imagenes\\velero.gif")) {
-				lblAct.setBounds(cont.getPosXs().get(iteradorPos), 200, 200, 200);
+				lblAct.setBounds(cont.obtenerPosBarcos().get(iteradorPos), 200, 200, 200); //arreglo[5] = arraylist.get(5)
 				
 			} else {
-				lblAct.setBounds(cont.getPosXs().get(iteradorPos), 50, 200, 200);
+				lblAct.setBounds(cont.obtenerPosBarcos().get(iteradorPos), 50, 200, 200);
 			}
 			
 			
@@ -91,7 +91,7 @@ public class VentanaJuego extends JFrame {
 			contador ++;
 			if(contador > 9) {
 				contador = 0;
-				cont.setSegCount(cont.getSegCount() + 1);
+				cont.actualizarTiempoJuego(cont.obtenerTiempoJuego() + 1); //obtenemos el tiempo actual y le sumamos 1 y actualizamos
 			}
 			ArrayList<ArrayList<Integer>> estadoJuego = null;
 			cont.actualizarEstadoJuego();
@@ -110,7 +110,7 @@ public class VentanaJuego extends JFrame {
 				act.setBounds(posEnem.get(iteradorPos), act.getY(), 200, 200);
 				iteradorPos++;
 			}
-			
+	
 		}
 		
 	}

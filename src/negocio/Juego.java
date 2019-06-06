@@ -4,6 +4,15 @@ public class Juego {
 
 	private String nombre = "BubbleShips";
 	private int nivelAct;
+	private int tiempo;
+
+	public int getTiempo() {
+		return tiempo;
+	}
+
+	public void setTiempo(int tiempo) {
+		this.tiempo = tiempo;
+	}
 
 	public Juego(int primerNivel) {
 		this.nivelAct = primerNivel;

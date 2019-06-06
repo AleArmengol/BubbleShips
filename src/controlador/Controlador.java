@@ -11,8 +11,8 @@ import negocio.ObjetivoEnemigo;
 public class Controlador {
 
 	private ArrayList<ObjetivoEnemigo> enemigos;
-	private ArrayList<String> paths; // contiene direccion de las imagenes de cada Enemigo
-	private ArrayList<Integer> posXs; // contiene posicion X de cada enemigo
+	//private ArrayList<String> paths; // contiene direccion de las imagenes de cada Enemigo
+	//private ArrayList<Integer> posXs; // contiene posicion X de cada enemigo
 
 
 
@@ -22,44 +22,32 @@ public class Controlador {
 	public Controlador() {
 		enemigos = new ArrayList<ObjetivoEnemigo>();
 		juegoAct = new Juego(1);
-		paths = new ArrayList<String>();
-		posXs = new ArrayList<Integer>();
 
 		for (int i = 0; i < 10; i++) { //creo los 10 enemigos
 			ObjetivoEnemigo nuevo = new ObjetivoEnemigo(juegoAct.getNivelAct());
 			enemigos.add(nuevo);
-			paths.add(nuevo.getPathImagen()); //agrego el path al arreglo, modificar
-			posXs.add(nuevo.getPosX());
 		}
 
 	}
-
-	// private float areaPantalla;
-
-	private void seleccionarDificultadInicio(String dif) {
-
-		return;
+	
+	
+	public ArrayList<String> obtenerPaths(){
+		ArrayList<String> paths = new ArrayList<String>();
+		for (ObjetivoEnemigo actual : enemigos) {
+			paths.add(actual.getPathImagen());
+		}
+		return paths;
 	}
-
-	public void empezarJuego() {
-
-		return;
+	
+	
+	public ArrayList<Integer> obtenerPosBarcos(){
+		ArrayList<Integer> posXs = new ArrayList<Integer>();
+		for (ObjetivoEnemigo actual: enemigos) {
+			posXs.add(actual.getPosX());
+		}
+		return posXs;
 	}
-
-	public void finalizarJuego() {
-
-		return;
-	}
-
-	public void dispararCañon() {
-
-		return;
-	}
-
-	public void moverMiraCañon() {
-
-		return;
-	}
+	
 
 	public ArrayList<ArrayList<Integer>> obtenerEstadoJuego() {
 		ArrayList<Integer> posActEn = new ArrayList<>(); //pos actuales enemigos
@@ -74,10 +62,19 @@ public class Controlador {
 		
 		return devolver;
 	}
+	
 
 	public int moverEnemigo(ObjetivoEnemigo enemigoActual) {
-		int posNueva = enemigoActual.mover(segCount);
+		int posNueva = enemigoActual.mover(juegoAct.getTiempo()); // 
 		return posNueva;
+	}
+	
+	public void actualizarTiempoJuego(int tiempoNuevo) {
+		juegoAct.setTiempo(tiempoNuevo);
+	}
+	
+	public int obtenerTiempoJuego() {
+		return juegoAct.getTiempo();
 	}
 
 	public void actualizarEstadoJuego() {
@@ -88,40 +85,67 @@ public class Controlador {
 
 		}
 	}
+	
 
 	public void configurarJuego(String dificultad) {
 
 	}
-
-	public int getSegCount() {
-		return segCount;
-	}
-
-	public void setSegCount(int segCount) {
-		this.segCount = segCount;
-	}
-
-	public ArrayList<ObjetivoEnemigo> getEnemigos() {
-		return enemigos;
+	
+	
+	private void seleccionarDificultadInicio(String dif) {
+		
+		return;
 	}
 	
-	public ArrayList<String> getPaths() {
-		return paths;
+	public void empezarJuego() {
+		
+		return;
 	}
 	
-	public void setPaths(ArrayList<String> paths) {
-		this.paths = paths;
+	public void finalizarJuego() {
+		
+		return;
+	}
+	
+	public void dispararCañon() {
+		
+		return;
+	}
+	
+	public void moverMiraCañon() {
+		
+		return;
 	}
 
-	public void setEnemigos(ArrayList<ObjetivoEnemigo> enemigos) {
-		this.enemigos = enemigos;
-	}
-	public ArrayList<Integer> getPosXs() {
-		return posXs;
-	}
-	
-	public void setPosXs(ArrayList<Integer> posXs) {
-		this.posXs = posXs;
-	}
+//	public int getSegCount() {
+//		return segCount;
+//	}
+//
+//	public void setSegCount(int segCount) {
+//		this.segCount = segCount;
+//	}
+
+//	public ArrayList<ObjetivoEnemigo> getEnemigos() {
+//		return enemigos;
+//	}
+//	
+//	public ArrayList<String> getPaths() {
+//		return paths;
+//	}
+//	
+//	public void setPaths(ArrayList<String> paths) {
+//		this.paths = paths;
+//	}
+//
+//	public void setEnemigos(ArrayList<ObjetivoEnemigo> enemigos) {
+//		this.enemigos = enemigos;
+//	}
+//	public ArrayList<Integer> getPosXs() {
+//		return posXs;
+//	}
+//	
+//	public void setPosXs(ArrayList<Integer> posXs) {
+//		this.posXs = posXs;
+//	}
 
 }
