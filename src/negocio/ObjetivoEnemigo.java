@@ -10,12 +10,12 @@ public class ObjetivoEnemigo {
 	private String pathImagen;
 	private Random r;
 	
-	public ObjetivoEnemigo(int nivel) {
+	public ObjetivoEnemigo(int nivel, int d) {
 		r = new Random();
-		int factor = 10; //factor de velocidad
+		int factor = 25; //factor de velocidad
 		int rand = r.nextInt(2); //genero un random para determinar la direccion del enemigo
-		int randDelay = r.nextInt(10) + 1; // segundos a esperar hasta que salga cada enemigo va de 1 a 10
-		delay = randDelay;
+		//int randDelay = r.nextInt(10) + 1; // segundos a esperar hasta que salga cada enemigo va de 1 a 10
+		delay =  d;
 		if(rand == 0) {
 			vel = -1 * factor * nivel; // el enemigo recorre la pantalla de derecha a izquierda
 			posX = 850;
@@ -29,9 +29,9 @@ public class ObjetivoEnemigo {
 		}
 	}
 	
-	public int mover(int segContador) {
+	public int mover(int tiempoTransc) {
 		int nuevaPos = getPosX() + getVel();
-		if(segContador > delay) {
+		if(tiempoTransc > delay) {
 			setPosX(nuevaPos);
 			return nuevaPos;
 		}

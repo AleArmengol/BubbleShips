@@ -24,7 +24,7 @@ public class Controlador {
 		juegoAct = new Juego(1);
 
 		for (int i = 0; i < 10; i++) { //creo los 10 enemigos
-			ObjetivoEnemigo nuevo = new ObjetivoEnemigo(juegoAct.getNivelAct());
+			ObjetivoEnemigo nuevo = new ObjetivoEnemigo(juegoAct.getNivelAct(), i + 1);
 			enemigos.add(nuevo);
 		}
 
