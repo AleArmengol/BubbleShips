@@ -29,6 +29,7 @@ public class VentanaJuego extends JFrame {
 		eventos();
 		this.setTitle("Bubble Ships");
 		this.setSize(800,600);
+		this.setResizable(false);
 		this.setVisible(true);
 	}
 
@@ -69,12 +70,13 @@ public class VentanaJuego extends JFrame {
 			} else {
 				lblAct.setBounds(cont.getPosXs().get(iteradorPos), 50, 200, 200);
 			}
-
+			
+			
 			lblEnemigos.add(lblAct);
 			c.add(lblAct);
 			iteradorPos ++;
 		}
-		
+		System.out.println(lblEnemigos.size());
 		
 	}
 	

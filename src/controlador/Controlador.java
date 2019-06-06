@@ -26,10 +26,10 @@ public class Controlador {
 		posXs = new ArrayList<Integer>();
 
 		for (int i = 0; i < 10; i++) { //creo los 10 enemigos
-			ObjetivoEnemigo temp = new ObjetivoEnemigo(juegoAct.getNivelAct());
-			enemigos.add(temp);
-			paths.add(temp.getPathImagen());
-			posXs.add(temp.getPosX());
+			ObjetivoEnemigo nuevo = new ObjetivoEnemigo(juegoAct.getNivelAct());
+			enemigos.add(nuevo);
+			paths.add(nuevo.getPathImagen()); //agrego el path al arreglo, modificar
+			posXs.add(nuevo.getPosX());
 		}
 
 	}

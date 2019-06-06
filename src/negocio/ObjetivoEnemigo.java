@@ -12,9 +12,9 @@ public class ObjetivoEnemigo {
 	
 	public ObjetivoEnemigo(int nivel) {
 		r = new Random();
-		int factor = 6; //factor de velocidad
+		int factor = 10; //factor de velocidad
 		int rand = r.nextInt(2); //genero un random para determinar la direccion del enemigo
-		int randDelay = r.nextInt(10) + 2; // segundos a esperar hasta que salga cada enemigo
+		int randDelay = r.nextInt(3) + 1; // segundos a esperar hasta que salga cada enemigo
 		delay = randDelay;
 		if(rand == 0) {
 			vel = -1 * factor * nivel; // el enemigo recorre la pantalla de derecha a izquierda
