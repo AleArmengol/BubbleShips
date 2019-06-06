@@ -19,7 +19,6 @@ public class VentanaJuego extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JLabel canon;
-	private JButton btnDisparar;
 	private ArrayList<JLabel> lblEnemigos;
 	private Controlador cont;
 	
@@ -46,7 +45,7 @@ public class VentanaJuego extends JFrame {
 		// TODO Auto-generated method stub
 		Container c = this.getContentPane();
 		c.setLayout(null);
-		c.setBackground(new Color(111,208,206));
+		c.setBackground(new Color(206,206,255));
 		
 		//cañon
 		canon = new JLabel();
@@ -54,10 +53,7 @@ public class VentanaJuego extends JFrame {
 		canon.setBounds(338, 458, 112, 112);
 		c.add(canon);
 		
-		//boton
-		btnDisparar = new JButton("Disparar");
-		btnDisparar.setBounds(450, 500, 150, 50);
-		c.add(btnDisparar);
+
 		
 		//enemigos
 		Iterator<String> iteradorPath = cont.getPaths().iterator();
