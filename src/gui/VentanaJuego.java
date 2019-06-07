@@ -4,14 +4,19 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
+
+import com.sun.prism.Image;
 
 import controlador.Controlador;
 
@@ -19,6 +24,7 @@ public class VentanaJuego extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JLabel canon;
+	private JLabel mira;
 	private ArrayList<JLabel> lblEnemigos;
 	private Controlador cont;
 	
@@ -53,6 +59,12 @@ public class VentanaJuego extends JFrame {
 		canon.setIcon(new ImageIcon("imagenes\\canonSF.png"));
 		canon.setBounds(338, 458, 112, 112);
 		c.add(canon);
+		
+		//mira
+		mira = new JLabel();
+		mira.setIcon(new ImageIcon("imagenes\\mira3.png"));
+		mira.setBounds(378, 290 , 21, 201);
+		c.add(mira);
 		
 
 		
