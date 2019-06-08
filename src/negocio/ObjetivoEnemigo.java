@@ -12,13 +12,13 @@ public class ObjetivoEnemigo {
 	
 	public ObjetivoEnemigo(int nivel, int d) {
 		r = new Random();
-		int factor = 25; //factor de velocidad
+		int factor = 10; //factor de velocidad
 		int rand = r.nextInt(2); //genero un random para determinar la direccion del enemigo
 		//int randDelay = r.nextInt(6) + 1; // segundos a esperar hasta que salga cada enemigo va de 1 a 10
-		delay =  d;
+		delay =  d * 3;
 		if(rand == 0) {
 			vel = -1 * factor * nivel; // el enemigo recorre la pantalla de derecha a izquierda
-			posX = 850;
+			posX = 1050;
 			posY = 50;
 			pathImagen = "imagenes\\veleroBack.gif";
 		} else {

@@ -2,8 +2,10 @@ package controlador;
 
 import java.util.*;
 
+import negocio.Cañon;
 import negocio.Juego;
 import negocio.ObjetivoEnemigo;
+import negocio.Proyectil;
 
 /**
  * 
@@ -11,6 +13,8 @@ import negocio.ObjetivoEnemigo;
 public class Controlador {
 
 	private ArrayList<ObjetivoEnemigo> enemigos;
+	private Cañon canon;
+	private ArrayList <Proyectil> balas;
 	//private ArrayList<String> paths; // contiene direccion de las imagenes de cada Enemigo
 	//private ArrayList<Integer> posXs; // contiene posicion X de cada enemigo
 
@@ -20,10 +24,12 @@ public class Controlador {
 
 	public Controlador() {
 		enemigos = new ArrayList<ObjetivoEnemigo>();
+		balas = new ArrayList<Proyectil>();
 		juegoAct = new Juego(1);
+		canon = new Cañon();
 
 		for (int i = 0; i < 10; i++) { //creo los 10 enemigos
-			ObjetivoEnemigo nuevo = new ObjetivoEnemigo(juegoAct.getNivelAct(), i + 1);
+			ObjetivoEnemigo nuevo = new ObjetivoEnemigo(juegoAct.getNivelAct(), i);
 			enemigos.add(nuevo);
 		}
 
@@ -47,9 +53,28 @@ public class Controlador {
 		return posXs;
 	}
 	
+	public ArrayList<Integer> obtenerPosXBala(){
+		ArrayList<Integer> posXsB = new ArrayList<Integer>();
+		for (Proyectil actual: balas) {
+			posXsB.add(actual.getPosX());
+		}
+		
+		return posXsB;
+	}
+	
+	public ArrayList<Integer> obtenerPosYBala(){
+		ArrayList<Integer> posYsB = new ArrayList<Integer>();
+		for (Proyectil actual: balas) {
+			posYsB.add(actual.getPosY());
+		}
+		
+		return posYsB;
+	}
 
 	public ArrayList<ArrayList<Integer>> obtenerEstadoJuego() {
 		ArrayList<Integer> posActEn = new ArrayList<>(); //pos actuales enemigos
+		ArrayList<Integer> posXBs = new ArrayList<>();    //pos actual x proyectiles
+		ArrayList<Integer> posYBs = new ArrayList<>();    //pos actual y proyecyiles
 		ArrayList<ArrayList<Integer>> devolver = new ArrayList<>(); //contiene la posicion de: Enemigos(Eje x),proyectil(x,y) y puntaje
 		
 		Iterator<ObjetivoEnemigo> iterador = enemigos.iterator();
@@ -57,7 +82,16 @@ public class Controlador {
 			ObjetivoEnemigo enemigoAct = (ObjetivoEnemigo) iterador.next();
 			posActEn.add(enemigoAct.getPosX()); //lleno el arraylist con todas las pos de los enemigos
 		}
+		
+		if(balas != null) {
+			for(Proyectil balaAct : balas) {
+				posXBs.add(balaAct.getPosX()); //lleno el arraylist con todas las pos x de las balas
+				posYBs.add(balaAct.getPosY()); //lleno el arraylist con todas las pos y de las balas
+			}
+		}
 		devolver.add(posActEn);
+		devolver.add(posXBs);
+		devolver.add(posYBs);
 		
 		return devolver;
 	}
@@ -83,8 +117,22 @@ public class Controlador {
 			moverEnemigo(enemigoAct);
 
 		}
+		
+		if(balas != null) {
+			for(Proyectil balaAct: balas) {
+				balaAct.recorrerPantalla();
+			}
+		}
 	}
 	
+	public void dispararCañon(float angulo, int potencia) {
+		Proyectil bala = canon.disparar(angulo, potencia);
+		balas.add(bala);
+	}
+	
+	public void moverProyectil(Proyectil balaAct) {
+		balaAct.recorrerPantalla();
+	}
 
 	public void configurarJuego(String dificultad) {
 
@@ -106,45 +154,10 @@ public class Controlador {
 		return;
 	}
 	
-	public void dispararCañon() {
-		
-		return;
-	}
 	
 	public void moverMiraCañon() {
 		
 		return;
 	}
-
-//	public int getSegCount() {
-//		return segCount;
-//	}
-//
-//	public void setSegCount(int segCount) {
-//		this.segCount = segCount;
-//	}
-
-//	public ArrayList<ObjetivoEnemigo> getEnemigos() {
-//		return enemigos;
-//	}
-//	
-//	public ArrayList<String> getPaths() {
-//		return paths;
-//	}
-//	
-//	public void setPaths(ArrayList<String> paths) {
-//		this.paths = paths;
-//	}
-//
-//	public void setEnemigos(ArrayList<ObjetivoEnemigo> enemigos) {
-//		this.enemigos = enemigos;
-//	}
-//	public ArrayList<Integer> getPosXs() {
-//		return posXs;
-//	}
-//	
-//	public void setPosXs(ArrayList<Integer> posXs) {
-//		this.posXs = posXs;
-//	}
 
 }

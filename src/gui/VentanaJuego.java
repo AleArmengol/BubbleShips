@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,16 +27,21 @@ public class VentanaJuego extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JLabel canon;
 	private JLabel mira;
+	private ArrayList <JLabel> lblBalas;
 	private ArrayList<JLabel> lblEnemigos;
 	private Controlador cont;
+	private Container c = this.getContentPane(); //puedo poner el container en el frame? para poder accederlo desde el keyListener y asi agregar un JFrame ?
+
 	
 	public VentanaJuego() {
 		lblEnemigos = new ArrayList<JLabel>();
+		lblBalas = new ArrayList<JLabel>();
+		
 		cont = new Controlador();//genera todo lo del controlador
 		configurar();
 		eventos();
 		this.setTitle("Bubble Ships");
-		this.setSize(800,600);
+		this.setSize(1000,800);
 		//this.setResizable(false);
 		this.setVisible(true);
 	}
@@ -43,6 +50,8 @@ public class VentanaJuego extends JFrame {
 		// TODO Auto-generated method stub
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
+		this.addKeyListener(new ManejadorTeclas());
+		
 		Timer t = new Timer(100, new ManejadorEventos(0));
 		
 		t.start();
@@ -50,21 +59,28 @@ public class VentanaJuego extends JFrame {
 
 	private void configurar() {
 		// TODO Auto-generated method stub
-		Container c = this.getContentPane();
 		c.setLayout(null);
 		c.setBackground(new Color(206,206,255));
 		
 		//cañon
 		canon = new JLabel();
 		canon.setIcon(new ImageIcon("imagenes\\canonSF.png"));
-		canon.setBounds(338, 458, 112, 112);
+		canon.setBounds(425, 655, 112, 112);
+		System.out.println(canon);
 		c.add(canon);
 		
 		//mira
 		mira = new JLabel();
 		mira.setIcon(new ImageIcon("imagenes\\mira3.png"));
-		mira.setBounds(378, 290 , 21, 201);
+		mira.setBounds(465, 490 , 21, 201);
 		c.add(mira);
+		
+		//bala
+//		bala = new JLabel();
+//		bala.setIcon(new ImageIcon("imagenes\\bala.png"));
+//		bala.setBounds(459, 652, 50, 50);
+//		bala.setVisible(false);
+//		c.add(bala);
 		
 
 		
@@ -88,7 +104,7 @@ public class VentanaJuego extends JFrame {
 			c.add(lblAct);
 			iteradorPos ++;
 		}
-		System.out.println(lblEnemigos.size());
+		
 		
 	}
 	
@@ -110,8 +126,8 @@ public class VentanaJuego extends JFrame {
 			estadoJuego = cont.obtenerEstadoJuego();
 			
 			ArrayList<Integer> posEnem = estadoJuego.get(0);
-			//ArrayList<Integer> posBalasX = estadoJuego.get(1);
-			//ArrayList<Integer> posBalasY = estadoJuego.get(2);
+			ArrayList<Integer> posBalasX = estadoJuego.get(1);
+			ArrayList<Integer> posBalasY = estadoJuego.get(2);
 			//int puntaje = estadoJuego.get(3).get(0);
 			
 			//REDIBUJO LOS ENEMIGOS
@@ -122,7 +138,46 @@ public class VentanaJuego extends JFrame {
 				act.setBounds(posEnem.get(iteradorPos), act.getY(), 200, 200);
 				iteradorPos++;
 			}
+			
+			//REDIBUJO LAS BALAS
+			int itPosBala = 0;
+			if(lblBalas != null) {
+				for(JLabel balaAct: lblBalas) {
+					balaAct.setBounds(posBalasX.get(itPosBala), posBalasY.get(itPosBala), 50, 50);
+				}
+			}
+		}
+		
+	}
 	
+	class ManejadorTeclas implements KeyListener{
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if(e.getKeyCode() == 32) {
+				//chequear esto, no dibuja la bala
+				JLabel nuevaBala = new JLabel();
+				nuevaBala.setIcon(new ImageIcon("imagenes\\bala.png"));
+			    nuevaBala.setBounds(459, 652, 50, 50);
+			    c.add(nuevaBala);
+				lblBalas.add(nuevaBala);
+				System.out.println(nuevaBala);
+				cont.dispararCañon(90, 2); //pasar angulo de la mira y potencia
+				
+			}
+			
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+
 		}
 		
 	}

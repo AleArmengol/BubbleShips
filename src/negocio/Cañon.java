@@ -8,6 +8,7 @@ import java.util.*;
  */
 public class Cañon {
 
+	Proyectil bala;
     /**
      * Default constructor
      */
@@ -43,9 +44,11 @@ public class Cañon {
      * @param posY 
      * @return
      */
-    public void dispara(int posX, int posY) {
-        // TODO implement here
-        return;
+    public Proyectil disparar(float angulo, int potencia) {
+        
+    	bala = new Proyectil(angulo, potencia);
+    	
+    	return bala;
     }
 
     /**
