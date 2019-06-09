@@ -1,12 +1,13 @@
 package test;
 
-import gui.VentanaJuego;
+import gui.VentanaInicio;
+
 
 public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new VentanaJuego();
+		new VentanaInicio(); 
 	}
 
 }
