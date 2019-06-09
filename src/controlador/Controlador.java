@@ -159,5 +159,13 @@ public class Controlador {
 		
 		return;
 	}
+	
+	//A partir de aca va el codio para las colisiones, no estoy seguro de si esta bien, consultar
+	public void hayColision() {
+		for (Proyectil bala: balas) {
+			bala.colisione(enemigos);
+		}
+	}
+	
 
 }
