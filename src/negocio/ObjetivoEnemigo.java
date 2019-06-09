@@ -5,6 +5,8 @@ import java.util.Random;
 public class ObjetivoEnemigo {
 	private int posX;
 	private int posY;
+	private final int width = 200;
+	private final int height = 200;
 	private int delay;
 	private int vel;
 	private String pathImagen;
@@ -67,6 +69,12 @@ public class ObjetivoEnemigo {
 	
 	public void setPathImagen(String pathImagen) {
 		this.pathImagen = pathImagen;
+	}
+	public int getWidth() {
+		return width;
+	}
+	public int getHeight() {
+		return height;
 	}
 	private boolean destruido;
 	

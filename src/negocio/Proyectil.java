@@ -8,9 +8,8 @@ public class Proyectil {
 	
 	private int posX;
 	private int posY;
-	private final int height = 50; //height and width
+	private final int height = 50;
 	private final int width = 50;
-	
 	private int vel;
 	private int factor = 1;
 	private double angulo;
@@ -38,7 +37,7 @@ public class Proyectil {
     }
 
     public boolean colisione(ArrayList<ObjetivoEnemigo> enems) {
-    	if(this.posY >)
+    	
         return false;
     }
 
