@@ -5,9 +5,12 @@ import java.util.*;
 public class Proyectil {
 	
 	ArrayList<ObjetivoEnemigo> enemigos;
+	
 	private int posX;
-
 	private int posY;
+	private final int height = 50; //height and width
+	private final int width = 50;
+	
 	private int vel;
 	private int factor = 1;
 	private double angulo;
@@ -34,8 +37,8 @@ public class Proyectil {
     	
     }
 
-    public boolean colisione() {
-        // TODO implement here
+    public boolean colisione(ArrayList<ObjetivoEnemigo> enems) {
+    	if(this.posY >)
         return false;
     }
 

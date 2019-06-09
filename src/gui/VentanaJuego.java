@@ -25,8 +25,8 @@ import controlador.Controlador;
 public class VentanaJuego extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-	private JLabel canon;
-	private JLabel mira;
+	private JLabel lblCanon;
+	private JLabel lblMira;
 	private ArrayList <JLabel> lblBalas;
 	private ArrayList<JLabel> lblEnemigos;
 	private Controlador cont;
@@ -63,16 +63,16 @@ public class VentanaJuego extends JFrame {
 		c.setBackground(new Color(206,206,255));
 		
 		//cañon
-		canon = new JLabel();
-		canon.setIcon(new ImageIcon("imagenes\\canonSF.png"));
-		canon.setBounds(425, 655, 112, 112);
-		c.add(canon);
+		lblCanon = new JLabel();
+		lblCanon.setIcon(new ImageIcon("imagenes\\canonSF.png"));
+		lblCanon.setBounds(425, 655, 112, 112);
+		c.add(lblCanon);
 		
 		//mira
-		mira = new JLabel();
-		mira.setIcon(new ImageIcon("imagenes\\mira3.png"));
-		mira.setBounds(465, 490 , 21, 201);
-		c.add(mira);
+		lblMira = new JLabel();
+		lblMira.setIcon(new ImageIcon("imagenes\\mira3.png"));
+		lblMira.setBounds(465, 490 , 21, 201);
+		c.add(lblMira);
 		
 		//bala
 //		bala = new JLabel();
@@ -160,7 +160,8 @@ public class VentanaJuego extends JFrame {
 			    nuevaBala.setBounds(459, 652, 50, 50);
 			    c.add(nuevaBala);
 				lblBalas.add(nuevaBala);
-				cont.dispararCañon(90, 45); //pasar angulo de la mira y potencia
+				cont.dispararCañon(90, 20); //pasar angulo de la mira y potencia
+				lblMira.setVisible(false);
 			}
 			
 			
@@ -168,8 +169,7 @@ public class VentanaJuego extends JFrame {
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
