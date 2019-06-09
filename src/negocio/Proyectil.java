@@ -9,14 +9,15 @@ public class Proyectil {
 
 	private int posY;
 	private int vel;
-	private float angulo;
+	private int factor = 1;
+	private double angulo;
 	private float pendiente;
-	private float tiempo; // para que sirve??
+	//private float tiempo; // para que sirve??
 
     public Proyectil(float angulo, int potencia) {
-    	this.angulo = angulo;
-    	float anguloRad = (float) Math.toRadians(this.angulo);
-    	this.pendiente = (float) Math.tan(anguloRad);
+    	//this.angulo = Math.toRadians(this.angulo);
+    	this.angulo = potencia;
+    	//this.pendiente = (float) Math.tan(anguloRad);
     	this.vel = potencia;
     	this.posX = 459;
     	this.posY = 652;
@@ -26,8 +27,8 @@ public class Proyectil {
 
 
     public void recorrerPantalla() {
-    	int nuevaPosX = (int) ((this.posX * pendiente) + vel);
-    	int nuevaPosY = (int) (this.posY - vel);
+    	int nuevaPosX = this.posX + vel;
+    	int nuevaPosY = this.posY - vel;
     	setPosX(nuevaPosX);
     	setPosY(nuevaPosY);
     	

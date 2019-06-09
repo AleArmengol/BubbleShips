@@ -66,7 +66,6 @@ public class VentanaJuego extends JFrame {
 		canon = new JLabel();
 		canon.setIcon(new ImageIcon("imagenes\\canonSF.png"));
 		canon.setBounds(425, 655, 112, 112);
-		System.out.println(canon);
 		c.add(canon);
 		
 		//mira
@@ -144,6 +143,7 @@ public class VentanaJuego extends JFrame {
 			if(lblBalas != null) {
 				for(JLabel balaAct: lblBalas) {
 					balaAct.setBounds(posBalasX.get(itPosBala), posBalasY.get(itPosBala), 50, 50);
+					itPosBala ++;
 				}
 			}
 		}
@@ -152,18 +152,15 @@ public class VentanaJuego extends JFrame {
 	
 	class ManejadorTeclas implements KeyListener{
 
-		@Override
+		//@Override
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == 32) {
-				//chequear esto, no dibuja la bala
 				JLabel nuevaBala = new JLabel();
 				nuevaBala.setIcon(new ImageIcon("imagenes\\bala.png"));
 			    nuevaBala.setBounds(459, 652, 50, 50);
 			    c.add(nuevaBala);
 				lblBalas.add(nuevaBala);
-				System.out.println(nuevaBala);
-				cont.dispararCañon(90, 2); //pasar angulo de la mira y potencia
-				
+				cont.dispararCañon(90, 45); //pasar angulo de la mira y potencia
 			}
 			
 			
