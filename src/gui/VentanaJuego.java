@@ -130,22 +130,23 @@ public class VentanaJuego extends JFrame {
 			//int puntaje = estadoJuego.get(3).get(0);
 			
 			//REDIBUJO LOS ENEMIGOS
-			Iterator<JLabel> iteradorEnem = lblEnemigos.iterator();
-			int iteradorPos = 0;
-			while(iteradorEnem.hasNext()) {
-				JLabel act = iteradorEnem.next();
-				act.setBounds(posEnem.get(iteradorPos), act.getY(), 200, 200);
-				iteradorPos++;
+			
+			int itPosEnem = 0;
+			for(JLabel enemAct: lblEnemigos) {
+				if(enemAct != null) {
+					enemAct.setBounds(posEnem.get(itPosEnem), enemAct.getY(), 200, 200);
+					itPosEnem++;
+				}
 			}
 			
 			//REDIBUJO LAS BALAS
 			int itPosBala = 0;
-			if(lblBalas != null) {
-				for(JLabel balaAct: lblBalas) {
-					balaAct.setBounds(posBalasX.get(itPosBala), posBalasY.get(itPosBala), 50, 50);
-					itPosBala ++;
-				}
+			for(JLabel balaAct: lblBalas) {
+				balaAct.setBounds(posBalasX.get(itPosBala), posBalasY.get(itPosBala), 50, 50);
+				itPosBala ++;
 			}
+			
+			cont.hayColision();
 		}
 		
 	}
@@ -161,7 +162,6 @@ public class VentanaJuego extends JFrame {
 			    c.add(nuevaBala);
 				lblBalas.add(nuevaBala);
 				cont.dispararCañon(90, 20); //pasar angulo de la mira y potencia
-				lblMira.setVisible(false);
 			}
 			
 			

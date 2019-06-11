@@ -11,14 +11,19 @@ public class Proyectil {
 	private final int height = 50;
 	private final int width = 50;
 	private int vel;
-	private int factor = 1;
+	private float decActX = 0; //guardan los decimales sobrantes de las operaciones ya que no se puede dibujar en pixeles con decimales
+	private float decActY = 0; //cuando estos sobrantes sean mayor a 1, se agrega una unidad a la pos correspondiente
+	private float catX;
+	private float catY;
 	private double angulo;
-	private float pendiente;
 	//private float tiempo; // para que sirve??
 
     public Proyectil(float angulo, int potencia) {
-    	//this.angulo = Math.toRadians(this.angulo);
-    	this.angulo = potencia;
+    	
+    	this.angulo = Math.toRadians(angulo);
+    	int hip = potencia;
+    	catX = (float) Math.cos(this.angulo) * hip;
+    	catY = (float) Math.sin(this.angulo) * hip;
     	//this.pendiente = (float) Math.tan(anguloRad);
     	this.vel = potencia;
     	this.posX = 459;
@@ -29,16 +34,36 @@ public class Proyectil {
 
 
     public void recorrerPantalla() {
-    	int nuevaPosX = this.posX + vel;
-    	int nuevaPosY = this.posY - vel;
+    	decActX += Math.abs(catX) - Math.abs((int) catX);
+    	decActY += Math.abs(catY) - (int) catY;
+    	int nuevaPosX = this.posX + (int) catX;
+    	int nuevaPosY = this.posY - (int) catY;
+    	if(decActX > 1) {
+    		if(catX < 0) {
+    			nuevaPosX--;
+    		} else {    			
+    			nuevaPosX++;
+    			decActX -= 1;
+    		}
+    	}
+    	if(decActY > 1) {
+    		nuevaPosY++;
+    		decActY -= 1;
+    	}
     	setPosX(nuevaPosX);
     	setPosY(nuevaPosY);
     	
     }
 
-    public boolean colisione(ArrayList<ObjetivoEnemigo> enems) {
+    public ObjetivoEnemigo colisione(ArrayList<ObjetivoEnemigo> enems) {
+    	for (ObjetivoEnemigo act : enems) {
+    		if(this.posY <= act.getPosY() + act.getHeight() && this.posX >= act.getPosX() && this.posX + this.width <= act.getPosX() + act.getWidth() && this.posY > act.getPosY() ) {
+    			System.out.println("Colisiono");
+    			return act;
+    		}
+    	}
+    	return null;
     	
-        return false;
     }
 
     public int getPosX() {

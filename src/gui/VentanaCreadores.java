@@ -25,7 +25,7 @@ public class VentanaCreadores extends JFrame{
 		btncerrar = new JButton("Cerrar");
 		titulo = new JTextField("Creadores");
 		tex=new  JLabel("GRUPO 2:");
-		creador1 = new JLabel("Alexis Armengo");
+		creador1 = new JLabel("Alexis Armengol");
 		creador2 = new JLabel("Gonzalo Bacigalupe");
 		
 		tex.setBounds(10, 10, 200, 30);

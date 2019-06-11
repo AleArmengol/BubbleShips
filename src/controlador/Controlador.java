@@ -80,7 +80,9 @@ public class Controlador {
 		Iterator<ObjetivoEnemigo> iterador = enemigos.iterator();
 		while (iterador.hasNext()) {
 			ObjetivoEnemigo enemigoAct = (ObjetivoEnemigo) iterador.next();
-			posActEn.add(enemigoAct.getPosX()); //lleno el arraylist con todas las pos de los enemigos
+			if(!enemigoAct.isDestruido()) {
+				posActEn.add(enemigoAct.getPosX()); //lleno el arraylist con todas las pos de los enemigos
+			}
 		}
 		
 		if(balas != null) {
@@ -114,8 +116,9 @@ public class Controlador {
 		Iterator<ObjetivoEnemigo> iterador = enemigos.iterator();
 		while (iterador.hasNext()) {
 			ObjetivoEnemigo enemigoAct = (ObjetivoEnemigo) iterador.next();
-			moverEnemigo(enemigoAct);
-
+			if(!enemigoAct.isDestruido()) {
+				moverEnemigo(enemigoAct);
+			}
 		}
 		
 		if(balas != null) {
@@ -160,10 +163,15 @@ public class Controlador {
 		return;
 	}
 	
-	//A partir de aca va el codio para las colisiones, no estoy seguro de si esta bien, consultar
+	//A partir de aca va el codigo para las colisiones, no estoy seguro de si esta bien, consultar
 	public void hayColision() {
+		ObjetivoEnemigo enemigoImpactado;
 		for (Proyectil bala: balas) {
-			bala.colisione(enemigos);
+			 enemigoImpactado = bala.colisione(enemigos);
+			 if(enemigoImpactado != null) {
+				 enemigoImpactado.setDestruido(true);
+			 }
+			
 		}
 	}
 	
