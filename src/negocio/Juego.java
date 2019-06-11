@@ -3,9 +3,14 @@ package negocio;
 public class Juego {
 
 	private String nombre = "BubbleShips";
+
 	private int nivelAct;
+	private int modo;
 	private int tiempo;
 
+	public Juego() {
+	}
+	
 	public int getTiempo() {
 		return tiempo;
 	}
@@ -14,8 +19,20 @@ public class Juego {
 		this.tiempo = tiempo;
 	}
 
-	public Juego(int primerNivel) {
-		this.nivelAct = primerNivel;
+	public int getNivelAct() {
+		return nivelAct;
+	}
+	
+	public void setNivelAct(int nivelAct) {
+		this.nivelAct = nivelAct;
+	}
+	
+	public int getModo() {
+		return modo;
+	}
+	
+	public void setModo(int modo) {
+		this.modo = modo;
 	}
 
 	public String getNombre() {
@@ -25,15 +42,6 @@ public class Juego {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
-	public int getNivelAct() {
-		return nivelAct;
-	}
-
-	public void setNivelAct(int nivelAct) {
-		this.nivelAct = nivelAct;
-	}
-
 	public void siguienteNivel() {
 		nivelAct++;
 	}
@@ -42,5 +50,6 @@ public class Juego {
 
 		return;
 	}
+
 
 }

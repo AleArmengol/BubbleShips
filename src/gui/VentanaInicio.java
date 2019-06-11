@@ -14,7 +14,6 @@ public class VentanaInicio extends JFrame{
 	
 	//Botones
 	private JButton btnjugar;
-	private JButton btnconfiguracion;
 	private JButton btncreadores;
 	private JButton btnsalir;
 	private JTextField name;
@@ -28,7 +27,6 @@ public class VentanaInicio extends JFrame{
 		
 		//creacion
 		btnjugar= new JButton("Jugar");
-		btnconfiguracion=new JButton("Confuguracion");
 		btncreadores=new JButton("Creadores");
 		btnsalir=new JButton("Salir");
 		name=new JTextField("Bubble Ships");
@@ -39,7 +37,6 @@ public class VentanaInicio extends JFrame{
 		//posiciones
 		//logotipo.setBounds(200, 5, 600, 250);
 		btnjugar.setBounds(625, 80, 125, 27);
-		btnconfiguracion.setBounds(625, 110, 125, 27);
 		btncreadores.setBounds(625, 140, 125, 27);
 		btnsalir.setBounds(625, 170, 125, 27);	
 		
@@ -54,7 +51,6 @@ public class VentanaInicio extends JFrame{
  		
  		//agregacion al contenedor
  		co.add(btnjugar);
-		co.add(btnconfiguracion);
 		co.add(btncreadores);
 		co.add(btnsalir);
 		co.add(name);
@@ -66,19 +62,10 @@ public class VentanaInicio extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				co.setVisible(false);
 				dispose();
-				new VentanaJuego();
-			}
-		});
-		
-		//push boton configuracion
-		btnconfiguracion.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
 				new VentanaConfiguracion();
 			}
 		});
-		
-		
-		
+
 		//push boton creaadores
 		btncreadores.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {

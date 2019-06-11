@@ -2,6 +2,8 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -47,7 +49,6 @@ public class VentanaJuego extends JFrame {
 	}
 
 	private void eventos() {
-		// TODO Auto-generated method stub
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		this.addKeyListener(new ManejadorTeclas());
@@ -58,7 +59,6 @@ public class VentanaJuego extends JFrame {
 	}
 
 	private void configurar() {
-		// TODO Auto-generated method stub
 		c.setLayout(null);
 		c.setBackground(new Color(206,206,255));
 		
@@ -70,9 +70,9 @@ public class VentanaJuego extends JFrame {
 		
 		//mira
 		lblMira = new JLabel();
-		lblMira.setIcon(new ImageIcon("imagenes\\mira3.png"));
-		lblMira.setBounds(465, 490 , 21, 201);
 		c.add(lblMira);
+		lblMira.setBounds(465, 490, 21, 201);
+		lblMira.setIcon(new ImageIcon("imagenes\\mira3.png"));
 		
 		//bala
 //		bala = new JLabel();
@@ -146,6 +146,7 @@ public class VentanaJuego extends JFrame {
 				itPosBala ++;
 			}
 			
+			//Chequeo Colision
 			cont.hayColision();
 		}
 		
@@ -154,14 +155,25 @@ public class VentanaJuego extends JFrame {
 	class ManejadorTeclas implements KeyListener{
 
 		//@Override
+		int angulo = 90;
 		public void keyPressed(KeyEvent e) {
-			if(e.getKeyCode() == 32) {
+			
+			if(e.getKeyCode() == 37) {
+				angulo += 10;
+			}
+			
+			if(e.getKeyCode() == 39) {
+				angulo -= 10;
+			}
+			
+			if(e.getKeyCode() == 32) { //barra espaciadora
+				
 				JLabel nuevaBala = new JLabel();
 				nuevaBala.setIcon(new ImageIcon("imagenes\\bala.png"));
 			    nuevaBala.setBounds(459, 652, 50, 50);
 			    c.add(nuevaBala);
 				lblBalas.add(nuevaBala);
-				cont.dispararCañon(90, 20); //pasar angulo de la mira y potencia
+				cont.dispararCañon(angulo, 20); //pasar angulo de la mira y potencia
 			}
 			
 			
@@ -178,4 +190,6 @@ public class VentanaJuego extends JFrame {
 		}
 		
 	}
+
+	
 }

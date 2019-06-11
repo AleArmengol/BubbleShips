@@ -24,7 +24,6 @@ public class Proyectil {
     	int hip = potencia;
     	catX = (float) Math.cos(this.angulo) * hip;
     	catY = (float) Math.sin(this.angulo) * hip;
-    	//this.pendiente = (float) Math.tan(anguloRad);
     	this.vel = potencia;
     	this.posX = 459;
     	this.posY = 652;
@@ -34,7 +33,7 @@ public class Proyectil {
 
 
     public void recorrerPantalla() {
-    	decActX += Math.abs(catX) - Math.abs((int) catX);
+    	decActX += Math.abs(catX) - Math.abs((int) catX); //.54
     	decActY += Math.abs(catY) - (int) catY;
     	int nuevaPosX = this.posX + (int) catX;
     	int nuevaPosY = this.posY - (int) catY;

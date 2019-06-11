@@ -2,6 +2,7 @@ package controlador;
 
 import java.util.*;
 
+import gui.VentanaConfiguracion;
 import negocio.Cañon;
 import negocio.Juego;
 import negocio.ObjetivoEnemigo;
@@ -15,24 +16,9 @@ public class Controlador {
 	private ArrayList<ObjetivoEnemigo> enemigos;
 	private Cañon canon;
 	private ArrayList <Proyectil> balas;
-	//private ArrayList<String> paths; // contiene direccion de las imagenes de cada Enemigo
-	//private ArrayList<Integer> posXs; // contiene posicion X de cada enemigo
-
-
-
 	private Juego juegoAct;
 
 	public Controlador() {
-		enemigos = new ArrayList<ObjetivoEnemigo>();
-		balas = new ArrayList<Proyectil>();
-		juegoAct = new Juego(1);
-		canon = new Cañon();
-
-		for (int i = 0; i < 10; i++) { //creo los 10 enemigos
-			ObjetivoEnemigo nuevo = new ObjetivoEnemigo(juegoAct.getNivelAct(), i);
-			enemigos.add(nuevo);
-		}
-
 	}
 	
 	
@@ -137,19 +123,25 @@ public class Controlador {
 		balaAct.recorrerPantalla();
 	}
 
-	public void configurarJuego(String dificultad) {
-
-	}
-	
-	
-	private void seleccionarDificultadInicio(String dif) {
-		
-		return;
+	public void configurarJuego(int modo, int nivel) {
+		juegoAct = new Juego();
+		juegoAct.setModo(modo);
+		juegoAct.setNivelAct(nivel);
+		empezarJuego();
 	}
 	
 	public void empezarJuego() {
 		
-		return;
+		enemigos = new ArrayList<ObjetivoEnemigo>();
+		balas = new ArrayList<Proyectil>();
+		canon = new Cañon();
+		int velocidad = juegoAct.getModo() * juegoAct.getNivelAct();
+		for (int i = 0; i < 10; i++) { //creo los 10 enemigos
+			ObjetivoEnemigo nuevo = new ObjetivoEnemigo(velocidad, i);
+			enemigos.add(nuevo);
+		}
+
+		
 	}
 	
 	public void finalizarJuego() {
@@ -170,6 +162,7 @@ public class Controlador {
 			 enemigoImpactado = bala.colisione(enemigos);
 			 if(enemigoImpactado != null) {
 				 enemigoImpactado.setDestruido(true);
+				 //enemigos.remove(enemigoImpactado);
 			 }
 			
 		}

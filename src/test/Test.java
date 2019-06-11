@@ -1,6 +1,6 @@
 package test;
-
 import gui.VentanaInicio;
+
 
 
 public class Test {

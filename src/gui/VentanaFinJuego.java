@@ -1,5 +1,6 @@
 package gui;
 
-public class VentanaFinJuego {
 
+public class VentanaFinJuego {
 }
+
