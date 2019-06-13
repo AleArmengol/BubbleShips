@@ -8,14 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.Timer;
@@ -31,15 +28,12 @@ public class VentanaJuego extends JFrame {
 	private JLabel lblMira;
 	private ArrayList <JLabel> lblBalas;
 	private ArrayList<JLabel> lblEnemigos;
-	private Controlador cont;
 	private Container c = this.getContentPane(); //puedo poner el container en el frame? para poder accederlo desde el keyListener y asi agregar un JFrame ?
 
 	
 	public VentanaJuego() {
 		lblEnemigos = new ArrayList<JLabel>();
 		lblBalas = new ArrayList<JLabel>();
-		
-		cont = new Controlador();//genera todo lo del controlador
 		configurar();
 		eventos();
 		this.setTitle("Bubble Ships");
@@ -84,7 +78,7 @@ public class VentanaJuego extends JFrame {
 
 		
 		//enemigos
-		Iterator<String> iteradorPath = cont.obtenerPaths().iterator();
+		Iterator<String> iteradorPath = Controlador.getInstance().obtenerPaths().iterator();
 		int iteradorPos = 0;
 		while(iteradorPath.hasNext()) {
 			JLabel lblAct = new JLabel();
@@ -92,10 +86,10 @@ public class VentanaJuego extends JFrame {
 			lblAct.setIcon(new ImageIcon(pathTemp));
 			
 			if(pathTemp.equals("imagenes\\velero.gif")) {
-				lblAct.setBounds(cont.obtenerPosBarcos().get(iteradorPos), 200, 200, 200); //arreglo[5] = arraylist.get(5)
+				lblAct.setBounds(Controlador.getInstance().obtenerPosBarcos().get(iteradorPos), 200, 200, 200); //arreglo[5] = arraylist.get(5)
 				
 			} else {
-				lblAct.setBounds(cont.obtenerPosBarcos().get(iteradorPos), 50, 200, 200);
+				lblAct.setBounds(Controlador.getInstance().obtenerPosBarcos().get(iteradorPos), 50, 200, 200);
 			}
 			
 			
@@ -118,11 +112,11 @@ public class VentanaJuego extends JFrame {
 			contador ++;
 			if(contador > 9) {
 				contador = 0;
-				cont.actualizarTiempoJuego(cont.obtenerTiempoJuego() + 1); //obtenemos el tiempo actual y le sumamos 1 y actualizamos
+				Controlador.getInstance().actualizarTiempoJuego(Controlador.getInstance().obtenerTiempoJuego() + 1); //obtenemos el tiempo actual y le sumamos 1 y actualizamos
 			}
 			ArrayList<ArrayList<Integer>> estadoJuego = null;
-			cont.actualizarEstadoJuego();
-			estadoJuego = cont.obtenerEstadoJuego();
+			Controlador.getInstance().actualizarEstadoJuego();
+			estadoJuego = Controlador.getInstance().obtenerEstadoJuego();
 			
 			ArrayList<Integer> posEnem = estadoJuego.get(0);
 			ArrayList<Integer> posBalasX = estadoJuego.get(1);
@@ -147,7 +141,7 @@ public class VentanaJuego extends JFrame {
 			}
 			
 			//Chequeo Colision
-			cont.hayColision();
+			Controlador.getInstance().hayColision();
 		}
 		
 	}
@@ -173,7 +167,7 @@ public class VentanaJuego extends JFrame {
 			    nuevaBala.setBounds(459, 652, 50, 50);
 			    c.add(nuevaBala);
 				lblBalas.add(nuevaBala);
-				cont.dispararCañon(angulo, 20); //pasar angulo de la mira y potencia
+				Controlador.getInstance().dispararCañon(angulo, 20); //pasar angulo de la mira y potencia
 			}
 			
 			

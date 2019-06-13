@@ -8,6 +8,8 @@ public class Proyectil {
 	
 	private int posX;
 	private int posY;
+	private boolean colisione = false;
+
 	private final int height = 50;
 	private final int width = 50;
 	private int vel;
@@ -29,6 +31,9 @@ public class Proyectil {
     	this.posY = 652;
     }
 
+    public boolean isColisione() {
+    	return colisione;
+    }
 
 
 
@@ -55,11 +60,14 @@ public class Proyectil {
     }
 
     public ObjetivoEnemigo colisione(ArrayList<ObjetivoEnemigo> enems) {
-    	for (ObjetivoEnemigo act : enems) {
-    		if(this.posY <= act.getPosY() + act.getHeight() && this.posX >= act.getPosX() && this.posX + this.width <= act.getPosX() + act.getWidth() && this.posY > act.getPosY() ) {
-    			System.out.println("Colisiono");
-    			return act;
-    		}
+    	if(this.posX > 0 && this.posX < 1000) { //para que no le pegue a los enemigos que estan fuera de la pantalla
+	    	for (ObjetivoEnemigo act : enems) {
+	    		if(this.posY <= act.getPosY() + act.getHeight() && this.posX >= act.getPosX() && this.posX + this.width <= act.getPosX() + act.getWidth() && this.posY > act.getPosY() ) {
+	    			System.out.println("Colisiono");
+	    			this.colisione = true;
+	    			return act;
+	    		}
+	    	}
     	}
     	return null;
     	

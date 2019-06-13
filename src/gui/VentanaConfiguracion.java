@@ -18,20 +18,16 @@ import negocio.Juego;
 public class VentanaConfiguracion extends JFrame {
 	
 	private JButton btnEmpezar;
-	private JTextField campoNombre;
 	private JLabel txtDificultad;
-	private JLabel txtNombreJugador;
 	private JRadioButton optionFa; 
 	private JRadioButton optionMe; 
 	private JRadioButton optionDi;
 	private JLabel nivel;
-	private Controlador cont;
 	private JComboBox<String> comboNiveles;
 	
 	
 	public VentanaConfiguracion() {
 
-		cont = new Controlador();
 		final Container c = this.getContentPane();
 		c.setLayout(null);
 		
@@ -93,7 +89,7 @@ public class VentanaConfiguracion extends JFrame {
 				} else {
 					numModo = 3;
 				}
-				cont.configurarJuego(numModo, numNivel);
+				Controlador.getInstance().configurarJuego(numModo, numNivel);
 				setVisible(false); 
 				dispose();
 				new VentanaJuego();

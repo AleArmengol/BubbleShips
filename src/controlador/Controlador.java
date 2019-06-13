@@ -17,8 +17,17 @@ public class Controlador {
 	private Cañon canon;
 	private ArrayList <Proyectil> balas;
 	private Juego juegoAct;
+	private static Controlador instance = null;
 
-	public Controlador() {
+	private Controlador() {
+		
+	}
+	
+	public static Controlador getInstance() {
+		if (instance == null) {
+			instance = new Controlador();
+		}
+		return instance;
 	}
 	
 	
@@ -69,12 +78,22 @@ public class Controlador {
 			if(!enemigoAct.isDestruido()) {
 				posActEn.add(enemigoAct.getPosX()); //lleno el arraylist con todas las pos de los enemigos
 			}
+			else {
+				enemigoAct.setPosY(1500);
+				posActEn.add(enemigoAct.getPosY());
+			}
 		}
 		
 		if(balas != null) {
 			for(Proyectil balaAct : balas) {
-				posXBs.add(balaAct.getPosX()); //lleno el arraylist con todas las pos x de las balas
-				posYBs.add(balaAct.getPosY()); //lleno el arraylist con todas las pos y de las balas
+				if(!balaAct.isColisione()) {
+					posXBs.add(balaAct.getPosX()); //lleno el arraylist con todas las pos x de las balas
+					posYBs.add(balaAct.getPosY()); //lleno el arraylist con todas las pos y de las balas
+				} else {
+					balaAct.setPosY(-100);
+					posXBs.add(balaAct.getPosX());
+					posYBs.add(balaAct.getPosY());
+				}
 			}
 		}
 		devolver.add(posActEn);
@@ -162,7 +181,6 @@ public class Controlador {
 			 enemigoImpactado = bala.colisione(enemigos);
 			 if(enemigoImpactado != null) {
 				 enemigoImpactado.setDestruido(true);
-				 //enemigos.remove(enemigoImpactado);
 			 }
 			
 		}
