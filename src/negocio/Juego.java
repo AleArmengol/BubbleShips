@@ -7,9 +7,36 @@ public class Juego {
 	private int nivelAct;
 	private int modo;
 	private int tiempo;
+	private int puntaje = 0;
+	private int bDestruidos = 0;
+
+
+
+
 
 	public Juego() {
 	}
+	
+	
+	public int getbDestruidos() {
+		return bDestruidos;
+	}
+	
+	public void setbDestruidos(int bDestruidos) {
+		this.bDestruidos = bDestruidos;
+	}
+	
+	public int getPuntaje() {
+		return puntaje;
+	}
+	
+	
+	
+	public void setPuntaje(int puntaje) {
+		this.puntaje = puntaje;
+	}
+	
+	
 	
 	public int getTiempo() {
 		return tiempo;

@@ -1,7 +1,9 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -15,6 +17,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 import com.sun.prism.Image;
@@ -26,9 +30,14 @@ public class VentanaJuego extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JLabel lblCanon;
 	private JLabel lblMira;
+	private JLabel lblFondo;
+	private JPanel panelDatosJuego;
+	private JTextField textPuntaje;
+	private JTextField textEnemDest;
+	private JTextField textVidas;
 	private ArrayList <JLabel> lblBalas;
 	private ArrayList<JLabel> lblEnemigos;
-	private Container c = this.getContentPane(); //puedo poner el container en el frame? para poder accederlo desde el keyListener y asi agregar un JFrame ?
+	private Container c; //puedo poner el container en el frame? para poder accederlo desde el keyListener y asi agregar un JFrame ?
 
 	
 	public VentanaJuego() {
@@ -38,7 +47,7 @@ public class VentanaJuego extends JFrame {
 		eventos();
 		this.setTitle("Bubble Ships");
 		this.setSize(1000,800);
-		//this.setResizable(false);
+		this.setResizable(false);
 		this.setVisible(true);
 	}
 
@@ -47,14 +56,55 @@ public class VentanaJuego extends JFrame {
 		
 		this.addKeyListener(new ManejadorTeclas());
 		
-		Timer t = new Timer(100, new ManejadorEventos(0));
+		Timer t = new Timer(30 , new ManejadorEventos(0));
 		
 		t.start();
 	}
 
 	private void configurar() {
+		c = this.getContentPane();
 		c.setLayout(null);
 		c.setBackground(new Color(206,206,255));
+		
+		//fondo
+//		lblFondo = new JLabel();
+//		lblFondo.setIcon(new ImageIcon("imagenes\\fondoAgua.png"));
+//		lblFondo.setBounds(50, 50, 50, 500);
+//		c.add(lblFondo);
+		
+		//datosJuegos
+		panelDatosJuego = new JPanel();
+		panelDatosJuego.setLayout(null);
+		panelDatosJuego.setVisible(true);
+		panelDatosJuego.setBackground(Color.BLACK);
+		panelDatosJuego.setBounds(0, 0, 1000, 35);
+		//c.add(panelDatosJuego);
+		
+		//Fuente para los textos
+		Font font = new Font("Courier", Font.BOLD, 20);
+		
+		textPuntaje = new JTextField("Puntuacion: 0");
+		textPuntaje.setFont(font);
+		textPuntaje.setBackground(Color.BLACK);
+		textPuntaje.setBorder(null);
+		textPuntaje.setForeground(Color.GREEN);
+		textPuntaje.setBounds(10, 0, 190, 30);
+		panelDatosJuego.add(textPuntaje);
+		
+		textEnemDest = new JTextField("Destruidos: 0");
+		textEnemDest.setFont(font);
+		textEnemDest.setBackground(Color.BLACK);
+		textEnemDest.setBorder(null);
+		textEnemDest.setForeground(Color.GREEN);
+		textEnemDest.setBounds(410, 0, 200, 30);
+		panelDatosJuego.add(textEnemDest);
+		
+		
+		textVidas = new JTextField("Vidas: 3");
+		
+		panelDatosJuego.add(textEnemDest);
+		panelDatosJuego.add(textVidas);
+		
 		
 		//cañon
 		lblCanon = new JLabel();
@@ -67,13 +117,6 @@ public class VentanaJuego extends JFrame {
 		c.add(lblMira);
 		lblMira.setBounds(465, 490, 21, 201);
 		lblMira.setIcon(new ImageIcon("imagenes\\mira3.png"));
-		
-		//bala
-//		bala = new JLabel();
-//		bala.setIcon(new ImageIcon("imagenes\\bala.png"));
-//		bala.setBounds(459, 652, 50, 50);
-//		bala.setVisible(false);
-//		c.add(bala);
 		
 
 		
@@ -121,7 +164,8 @@ public class VentanaJuego extends JFrame {
 			ArrayList<Integer> posEnem = estadoJuego.get(0);
 			ArrayList<Integer> posBalasX = estadoJuego.get(1);
 			ArrayList<Integer> posBalasY = estadoJuego.get(2);
-			//int puntaje = estadoJuego.get(3).get(0);
+			//int puntuacion = estadoJuego.get(3).get(0);
+			
 			
 			//REDIBUJO LOS ENEMIGOS
 			
@@ -142,6 +186,8 @@ public class VentanaJuego extends JFrame {
 			
 			//Chequeo Colision
 			Controlador.getInstance().hayColision();
+			
+			//
 		}
 		
 	}

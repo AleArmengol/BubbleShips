@@ -70,8 +70,8 @@ public class Controlador {
 		ArrayList<Integer> posActEn = new ArrayList<>(); //pos actuales enemigos
 		ArrayList<Integer> posXBs = new ArrayList<>();    //pos actual x proyectiles
 		ArrayList<Integer> posYBs = new ArrayList<>();    //pos actual y proyecyiles
+		ArrayList<Integer> puntos = new ArrayList<>();   //[0]puntuacion [1] enemigos destruidos
 		ArrayList<ArrayList<Integer>> devolver = new ArrayList<>(); //contiene la posicion de: Enemigos(Eje x),proyectil(x,y) y puntaje
-		
 		Iterator<ObjetivoEnemigo> iterador = enemigos.iterator();
 		while (iterador.hasNext()) {
 			ObjetivoEnemigo enemigoAct = (ObjetivoEnemigo) iterador.next();
@@ -93,12 +93,18 @@ public class Controlador {
 					balaAct.setPosY(-100);
 					posXBs.add(balaAct.getPosX());
 					posYBs.add(balaAct.getPosY());
+					
 				}
 			}
 		}
+		
+		puntos.add(juegoAct.getPuntaje());
+		puntos.add(juegoAct.getbDestruidos());
+		
 		devolver.add(posActEn);
 		devolver.add(posXBs);
 		devolver.add(posYBs);
+		devolver.add(puntos);
 		
 		return devolver;
 	}
@@ -181,6 +187,16 @@ public class Controlador {
 			 enemigoImpactado = bala.colisione(enemigos);
 			 if(enemigoImpactado != null) {
 				 enemigoImpactado.setDestruido(true);
+					//Si impacto actualizo el puntaje y los enemigos impactados
+					Integer actPuntaje = juegoAct.getPuntaje();
+					Integer nuevoPuntaje;
+					nuevoPuntaje = actPuntaje + 20;
+					juegoAct.setPuntaje(nuevoPuntaje);
+					
+					Integer actBDest = juegoAct.getbDestruidos();
+					Integer nuevoBDest;
+					nuevoBDest = actBDest + 1;
+					juegoAct.setbDestruidos(nuevoBDest);
 			 }
 			
 		}
