@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.Timer;
@@ -38,7 +39,7 @@ public class VentanaJuego extends JFrame {
 	private ArrayList <JLabel> lblBalas;
 	private ArrayList<JLabel> lblEnemigos;
 	private Container c; //puedo poner el container en el frame? para poder accederlo desde el keyListener y asi agregar un JFrame ?
-
+	private int segundos = 1;
 	
 	public VentanaJuego() {
 		lblEnemigos = new ArrayList<JLabel>();
@@ -56,7 +57,7 @@ public class VentanaJuego extends JFrame {
 		
 		this.addKeyListener(new ManejadorTeclas());
 		
-		Timer t = new Timer(30 , new ManejadorEventos(0));
+		Timer t = new Timer(25 , new ManejadorEventos(0));
 		
 		t.start();
 	}
@@ -66,44 +67,45 @@ public class VentanaJuego extends JFrame {
 		c.setLayout(null);
 		c.setBackground(new Color(206,206,255));
 		
-		//fondo
+//	//	fondo
 //		lblFondo = new JLabel();
 //		lblFondo.setIcon(new ImageIcon("imagenes\\fondoAgua.png"));
 //		lblFondo.setBounds(50, 50, 50, 500);
 //		c.add(lblFondo);
 		
-		//datosJuegos
-		panelDatosJuego = new JPanel();
-		panelDatosJuego.setLayout(null);
-		panelDatosJuego.setVisible(true);
-		panelDatosJuego.setBackground(Color.BLACK);
-		panelDatosJuego.setBounds(0, 0, 1000, 35);
-		//c.add(panelDatosJuego);
-		
-		//Fuente para los textos
-		Font font = new Font("Courier", Font.BOLD, 20);
-		
-		textPuntaje = new JTextField("Puntuacion: 0");
-		textPuntaje.setFont(font);
-		textPuntaje.setBackground(Color.BLACK);
-		textPuntaje.setBorder(null);
-		textPuntaje.setForeground(Color.GREEN);
-		textPuntaje.setBounds(10, 0, 190, 30);
-		panelDatosJuego.add(textPuntaje);
-		
-		textEnemDest = new JTextField("Destruidos: 0");
-		textEnemDest.setFont(font);
-		textEnemDest.setBackground(Color.BLACK);
-		textEnemDest.setBorder(null);
-		textEnemDest.setForeground(Color.GREEN);
-		textEnemDest.setBounds(410, 0, 200, 30);
-		panelDatosJuego.add(textEnemDest);
-		
-		
-		textVidas = new JTextField("Vidas: 3");
-		
-		panelDatosJuego.add(textEnemDest);
-		panelDatosJuego.add(textVidas);
+//		//datosJuegos
+//		panelDatosJuego = new JPanel();
+//		panelDatosJuego.setLayout(null);
+//		panelDatosJuego.setVisible(true);
+//		panelDatosJuego.setBackground(Color.BLACK);
+//		panelDatosJuego.setBounds(0, 0, 1000, 35);
+//		c.add(panelDatosJuego);
+//		
+////		
+//		//Fuente para los textos
+//		Font font = new Font("Courier", Font.BOLD, 20);
+//		
+//		textPuntaje = new JTextField("Puntuacion: 0");
+////		textPuntaje.setFont(font);
+////		//textPuntaje.setBackground(Color.BLACK);
+////		textPuntaje.setBorder(null);
+////		textPuntaje.setForeground(Color.GREEN);
+////		textPuntaje.setBounds(10, 0, 190, 30);
+////		c.add(textPuntaje);
+//		
+//		textEnemDest = new JTextField("Destruidos: 0");
+////		textEnemDest.setFont(font);
+////		//textEnemDest.setBackground(Color.BLACK);
+////		textEnemDest.setBorder(null);
+////		textEnemDest.setForeground(Color.GREEN);
+//		textEnemDest.setBounds(410, 0, 200, 30);
+//		//c.add(textEnemDest);
+//		
+//		
+//		textVidas = new JTextField("Vidas: 3");
+//		
+		//c.add(textEnemDest);
+		//c.add(textVidas);
 		
 		
 		//cañon
@@ -115,8 +117,8 @@ public class VentanaJuego extends JFrame {
 		//mira
 		lblMira = new JLabel();
 		c.add(lblMira);
-		lblMira.setBounds(465, 490, 21, 201);
-		lblMira.setIcon(new ImageIcon("imagenes\\mira3.png"));
+		lblMira.setBounds(420, 170, 125, 125);
+		lblMira.setIcon(new ImageIcon("imagenes\\mira5.png"));
 		
 
 		
@@ -141,7 +143,6 @@ public class VentanaJuego extends JFrame {
 			iteradorPos ++;
 		}
 		
-		
 	}
 	
 	class ManejadorEventos implements ActionListener{
@@ -151,12 +152,19 @@ public class VentanaJuego extends JFrame {
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// cada 100 ms...
+			// cada 25 ms...
 			contador ++;
-			if(contador > 9) {
+			if(contador > 40) { // cada 1 segundo
+				segundos ++;
 				contador = 0;
 				Controlador.getInstance().actualizarTiempoJuego(Controlador.getInstance().obtenerTiempoJuego() + 1); //obtenemos el tiempo actual y le sumamos 1 y actualizamos
+				if(Controlador.getInstance().pasoUltimoBarco()) {
+					Controlador.getInstance().crearBarcos();
+					System.out.println("Pasate de nivel");
+					Controlador.getInstance().actualizarTiempoJuego(0); //reiniciamos el tiempo de juego a 0
+				}
 			}
+			
 			ArrayList<ArrayList<Integer>> estadoJuego = null;
 			Controlador.getInstance().actualizarEstadoJuego();
 			estadoJuego = Controlador.getInstance().obtenerEstadoJuego();
@@ -196,24 +204,45 @@ public class VentanaJuego extends JFrame {
 
 		//@Override
 		int angulo = 90;
+		int potencia = 7;
 		public void keyPressed(KeyEvent e) {
-			
-			if(e.getKeyCode() == 37) {
+			//JOptionPane.showInternalMessageDialog(null, e.getKeyCode());
+			if(e.getKeyCode() == 37) { //izq
+				int nuevaPosMira = lblMira.getX() - 10;
+				lblMira.setBounds(nuevaPosMira, lblMira.getY(), 125, 125);
 				angulo += 10;
 			}
 			
-			if(e.getKeyCode() == 39) {
-				angulo -= 10;
+			if(e.getKeyCode() == 39) { //derecha
+				int opuesto = 420;
+				int ady = Math.abs(484 - lblMira.getX()) ; //484 pos de donde sale la bala (centro)
+				angulo = (int) Math.toDegrees((Math.atan(opuesto/ady)));
+				System.out.println(angulo);
+				int nuevaPosMira = lblMira.getX() + 10;
+				lblMira.setBounds(nuevaPosMira, lblMira.getY(), 125, 125);
 			}
 			
-			if(e.getKeyCode() == 32) { //barra espaciadora
-				
-				JLabel nuevaBala = new JLabel();
-				nuevaBala.setIcon(new ImageIcon("imagenes\\bala.png"));
-			    nuevaBala.setBounds(459, 652, 50, 50);
-			    c.add(nuevaBala);
-				lblBalas.add(nuevaBala);
-				Controlador.getInstance().dispararCañon(angulo, 20); //pasar angulo de la mira y potencia
+			if(e.getKeyCode() == 77) { //letra M
+				potencia += 3;
+			}
+			if(e.getKeyCode() == 78) { //letra N
+				potencia -= 3;
+				if (potencia < 1) {
+					potencia = 1;
+				}
+			}
+			
+			if(segundos >= 1) {
+				if(e.getKeyCode() == 32) { //barra espaciadora
+					
+					JLabel nuevaBala = new JLabel();
+					nuevaBala.setIcon(new ImageIcon("imagenes\\bala.png"));
+				    nuevaBala.setBounds(459, 652, 50, 50);
+				    c.add(nuevaBala);
+					lblBalas.add(nuevaBala);
+					Controlador.getInstance().dispararCañon(angulo, potencia); //pasar angulo de la mira y potencia
+					segundos = 0;
+				}
 			}
 			
 			

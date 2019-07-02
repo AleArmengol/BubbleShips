@@ -18,8 +18,8 @@ public class Proyectil {
 	private float catX;
 	private float catY;
 	private double angulo;
-	//private float tiempo; // para que sirve??
 
+	
     public Proyectil(float angulo, int potencia) {
     	
     	this.angulo = Math.toRadians(angulo);

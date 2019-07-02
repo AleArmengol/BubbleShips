@@ -34,7 +34,7 @@ public class VentanaConfiguracion extends JFrame {
 		btnEmpezar = new JButton("Empezar");
 		txtDificultad= new JLabel("Modo:");
 		
-		btnEmpezar.setBounds(110, 190,80,20);
+		btnEmpezar.setBounds(90, 160,100,40);
 		txtDificultad.setBounds(10, 10, 200, 30);
 		
 		c.add(btnEmpezar);

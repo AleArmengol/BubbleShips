@@ -42,6 +42,9 @@ public class ObjetivoEnemigo {
 	public int getPosX() {
 		return posX;
 	}
+	public int getDelay() {
+		return delay;
+	}
 	public void setPosX(int posX) {
 		this.posX = posX;
 	}

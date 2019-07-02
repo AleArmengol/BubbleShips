@@ -156,17 +156,41 @@ public class Controlador {
 	}
 	
 	public void empezarJuego() {
-		
-		enemigos = new ArrayList<ObjetivoEnemigo>();
+		crearBarcos();
 		balas = new ArrayList<Proyectil>();
 		canon = new Cañon();
+	}
+	
+	public void crearBarcos() {
+		
+		enemigos = new ArrayList<ObjetivoEnemigo>();
+
 		int velocidad = juegoAct.getModo() * juegoAct.getNivelAct();
 		for (int i = 0; i < 10; i++) { //creo los 10 enemigos
 			ObjetivoEnemigo nuevo = new ObjetivoEnemigo(velocidad, i);
 			enemigos.add(nuevo);
+			System.out.println(nuevo.getDelay());
 		}
 
 		
+	}
+	
+	public boolean pasoUltimoBarco() {
+		
+		if(enemigos.get(9).getVel() > 0) {
+			if(enemigos.get(9).getPosX() > 1200) {
+				juegoAct.pasarNivel();
+				return true;
+			}
+		}
+		else {
+			if(enemigos.get(9).getPosX() < -200) {
+				juegoAct.pasarNivel();
+				return true;
+			}
+			
+		}
+		return false;
 	}
 	
 	public void finalizarJuego() {

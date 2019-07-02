@@ -37,8 +37,8 @@ public class VentanaInicio extends JFrame{
 		//posiciones
 		//logotipo.setBounds(200, 5, 600, 250);
 		btnjugar.setBounds(625, 80, 125, 27);
-		btncreadores.setBounds(625, 140, 125, 27);
-		btnsalir.setBounds(625, 170, 125, 27);	
+		btncreadores.setBounds(625, 120, 125, 27);
+		btnsalir.setBounds(625, 155, 125, 27);	
 		
 		//configuracion frame
 		this.setSize(1400,800);

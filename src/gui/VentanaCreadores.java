@@ -31,7 +31,7 @@ public class VentanaCreadores extends JFrame{
 		tex.setBounds(10, 10, 200, 30);
 		creador1.setBounds(10, 40, 150, 20);
 		creador2.setBounds(10, 70, 150, 20);
-		btncerrar.setBounds(130, 190, 100, 20);
+		btncerrar.setBounds(130, 180, 100, 20);
 		
 		this.setSize(250, 250);
 		this.setVisible(true);

@@ -79,4 +79,10 @@ public class Juego {
 	}
 
 
+	public void pasarNivel() {
+		this.nivelAct += 1;
+		
+	}
+
+
 }
