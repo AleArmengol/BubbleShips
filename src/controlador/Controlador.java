@@ -186,14 +186,10 @@ public class Controlador {
 	}
 
 	public boolean pasoUltimoBarco() {
-		
-		if(enemigos.get(9).isDestruido()) {
-			System.out.println("Destruims el ultimo");
-		}
 		if (enemigos.get(9).getVel() > 0) { // barco yendo para la derecha
 			if (enemigos.get(9).getPosX() > 1200) {
 				if (juegoAct.getbDestruidos() < 5) { // no pasa de nivel
-					System.out.println("Reinicio Nivel");
+					System.out.println("Reinicio Nivel perdiste una vida");
 					jugadorAct.setVidas(jugadorAct.getVidas() - 1);
 					juegoAct.reiniciarNivel();
 					return true;
@@ -208,7 +204,7 @@ public class Controlador {
 			if (enemigos.get(9).getPosX() < -200) {
 				if (juegoAct.getbDestruidos() < 5) { // no pasa de nivel
 					jugadorAct.setVidas(jugadorAct.getVidas() - 1);
-					System.out.println("Reinicio Nivel");
+					System.out.println("Reinicio Nivel perdiste una vida");
 					juegoAct.reiniciarNivel();
 					return true;
 				}
@@ -244,7 +240,7 @@ public class Controlador {
 				// Si impacto actualizo el puntaje y los enemigos impactados
 				Integer actPuntaje = jugadorAct.getPuntaje();
 				Integer nuevoPuntaje;
-				nuevoPuntaje = actPuntaje + 20;
+				nuevoPuntaje = actPuntaje + 100;
 				jugadorAct.setPuntaje(nuevoPuntaje);
 
 				Integer actBDest = juegoAct.getbDestruidos();
