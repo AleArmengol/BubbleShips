@@ -240,7 +240,7 @@ public class Controlador {
 				// Si impacto actualizo el puntaje y los enemigos impactados
 				Integer actPuntaje = jugadorAct.getPuntaje();
 				Integer nuevoPuntaje;
-				nuevoPuntaje = actPuntaje + 100;
+				nuevoPuntaje = actPuntaje + 20;
 				jugadorAct.setPuntaje(nuevoPuntaje);
 
 				Integer actBDest = juegoAct.getbDestruidos();

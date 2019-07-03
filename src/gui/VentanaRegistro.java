@@ -67,8 +67,10 @@ public class VentanaRegistro extends JFrame {
  					String nombre= n+" "+puntuacion;
  					out.println(nombre);
  				} catch (IOException e1) {
- 					//exception handling left as an exercise for the reader
- 				}		
+ 					
+ 					
+ 				}
+ 				new VentanaRankings();
 			}
 		});
 	}
