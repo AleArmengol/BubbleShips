@@ -174,7 +174,7 @@ public class VentanaJuego extends JFrame {
 			ArrayList<Integer> posEnem = estadoJuego.get(0);
 			ArrayList<Integer> posBalasX = estadoJuego.get(1);
 			ArrayList<Integer> posBalasY = estadoJuego.get(2);
-			//int puntuacion = estadoJuego.get(3).get(0);
+			int puntuacion = estadoJuego.get(3).get(0);
 			int perdio = estadoJuego.get(4).get(0);
 			
 			
@@ -199,10 +199,8 @@ public class VentanaJuego extends JFrame {
 				Controlador.getInstance().hayColision();	
 			} else {
 				t.stop();
-				
+				new VentanaRegistro(puntuacion);
 			}
-		
-
 		}
 		
 	}

@@ -3,7 +3,7 @@ package negocio;
 public class Jugador {
 	
 	private int puntaje = 0;
-	private int vidas = 3;
+	private int vidas = 0; 
 	
 	public int getPuntaje() {
 		return puntaje;
