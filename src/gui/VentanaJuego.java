@@ -40,6 +40,7 @@ public class VentanaJuego extends JFrame {
 	private ArrayList<JLabel> lblEnemigos;
 	private Container c; //puedo poner el container en el frame? para poder accederlo desde el keyListener y asi agregar un JFrame ?
 	private int segundos = 1;
+	Timer t;
 	
 	public VentanaJuego() {
 		lblEnemigos = new ArrayList<JLabel>();
@@ -57,7 +58,7 @@ public class VentanaJuego extends JFrame {
 		
 		this.addKeyListener(new ManejadorTeclas());
 		
-		Timer t = new Timer(25 , new ManejadorEventos(0));
+		t = new Timer(25 , new ManejadorEventos(0));
 		
 		t.start();
 	}
@@ -67,46 +68,45 @@ public class VentanaJuego extends JFrame {
 		c.setLayout(null);
 		c.setBackground(new Color(206,206,255));
 		
-//	//	fondo
-//		lblFondo = new JLabel();
-//		lblFondo.setIcon(new ImageIcon("imagenes\\fondoAgua.png"));
-//		lblFondo.setBounds(50, 50, 50, 500);
-//		c.add(lblFondo);
+		//fondo
+		lblFondo = new JLabel();
+		lblFondo.setIcon(new ImageIcon("imagenes\\fondoAgua.png"));
+		lblFondo.setBounds(50, 50, 50, 500);
+		c.add(lblFondo);
+
+		//datosJuegos
+		panelDatosJuego = new JPanel();
+		panelDatosJuego.setLayout(null);
+		panelDatosJuego.setVisible(true);
+		panelDatosJuego.setBackground(Color.BLACK);
+		panelDatosJuego.setBounds(0, 0, 1000, 35);
 		
-//		//datosJuegos
-//		panelDatosJuego = new JPanel();
-//		panelDatosJuego.setLayout(null);
-//		panelDatosJuego.setVisible(true);
-//		panelDatosJuego.setBackground(Color.BLACK);
-//		panelDatosJuego.setBounds(0, 0, 1000, 35);
-//		c.add(panelDatosJuego);
-//		
-////		
-//		//Fuente para los textos
-//		Font font = new Font("Courier", Font.BOLD, 20);
-//		
-//		textPuntaje = new JTextField("Puntuacion: 0");
-////		textPuntaje.setFont(font);
-////		//textPuntaje.setBackground(Color.BLACK);
-////		textPuntaje.setBorder(null);
-////		textPuntaje.setForeground(Color.GREEN);
-////		textPuntaje.setBounds(10, 0, 190, 30);
-////		c.add(textPuntaje);
-//		
-//		textEnemDest = new JTextField("Destruidos: 0");
-////		textEnemDest.setFont(font);
-////		//textEnemDest.setBackground(Color.BLACK);
-////		textEnemDest.setBorder(null);
-////		textEnemDest.setForeground(Color.GREEN);
-//		textEnemDest.setBounds(410, 0, 200, 30);
-//		//c.add(textEnemDest);
-//		
-//		
-//		textVidas = new JTextField("Vidas: 3");
-//		
-		//c.add(textEnemDest);
-		//c.add(textVidas);
 		
+		//Fuente para los textos
+		Font font = new Font("Courier", Font.BOLD, 20);
+		
+		textPuntaje = new JTextField("Puntuacion: 0");
+		textPuntaje.setFont(font);
+		textPuntaje.setBackground(Color.BLACK);
+		textPuntaje.setBorder(null);
+		textPuntaje.setForeground(Color.GREEN);
+		textPuntaje.setBounds(10, 0, 190, 30);
+		panelDatosJuego.add(textPuntaje);
+		
+		textEnemDest = new JTextField("Destruidos: 0");
+		textEnemDest.setFont(font);
+		textEnemDest.setBackground(Color.BLACK);
+		textEnemDest.setBorder(null);
+		textEnemDest.setForeground(Color.GREEN);
+		textEnemDest.setBounds(410, 0, 200, 30);
+		panelDatosJuego.add(textEnemDest);
+
+		
+		textVidas = new JTextField("Vidas: 3");
+		panelDatosJuego.add(textEnemDest);
+		panelDatosJuego.add(textVidas);
+	
+		//c.add(panelDatosJuego);
 		
 		//cañon
 		lblCanon = new JLabel();
@@ -152,6 +152,7 @@ public class VentanaJuego extends JFrame {
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
 			// cada 25 ms...
 			contador ++;
 			if(contador > 40) { // cada 1 segundo
@@ -160,7 +161,8 @@ public class VentanaJuego extends JFrame {
 				Controlador.getInstance().actualizarTiempoJuego(Controlador.getInstance().obtenerTiempoJuego() + 1); //obtenemos el tiempo actual y le sumamos 1 y actualizamos
 				if(Controlador.getInstance().pasoUltimoBarco()) {
 					Controlador.getInstance().crearBarcos();
-					System.out.println("Pasate de nivel");
+					System.out.println("Termino nivel");
+					System.out.println("CREO BARCOS");
 					Controlador.getInstance().actualizarTiempoJuego(0); //reiniciamos el tiempo de juego a 0
 				}
 			}
@@ -173,29 +175,34 @@ public class VentanaJuego extends JFrame {
 			ArrayList<Integer> posBalasX = estadoJuego.get(1);
 			ArrayList<Integer> posBalasY = estadoJuego.get(2);
 			//int puntuacion = estadoJuego.get(3).get(0);
+			int perdio = estadoJuego.get(4).get(0);
 			
 			
 			//REDIBUJO LOS ENEMIGOS
-			
-			int itPosEnem = 0;
-			for(JLabel enemAct: lblEnemigos) {
-				if(enemAct != null) {
-					enemAct.setBounds(posEnem.get(itPosEnem), enemAct.getY(), 200, 200);
-					itPosEnem++;
+			if(perdio != 1) {
+				int itPosEnem = 0;
+				for(JLabel enemAct: lblEnemigos) {
+					if(enemAct != null) {
+						enemAct.setBounds(posEnem.get(itPosEnem), enemAct.getY(), 200, 200);
+						itPosEnem++;
+					}
 				}
+				
+				//REDIBUJO LAS BALAS
+				int itPosBala = 0;
+				for(JLabel balaAct: lblBalas) {
+					balaAct.setBounds(posBalasX.get(itPosBala), posBalasY.get(itPosBala), 50, 50);
+					itPosBala ++;
+				}
+				
+				//Chequeo Colision
+				Controlador.getInstance().hayColision();	
+			} else {
+				t.stop();
+				
 			}
-			
-			//REDIBUJO LAS BALAS
-			int itPosBala = 0;
-			for(JLabel balaAct: lblBalas) {
-				balaAct.setBounds(posBalasX.get(itPosBala), posBalasY.get(itPosBala), 50, 50);
-				itPosBala ++;
-			}
-			
-			//Chequeo Colision
-			Controlador.getInstance().hayColision();
-			
-			//
+		
+
 		}
 		
 	}
@@ -208,18 +215,34 @@ public class VentanaJuego extends JFrame {
 		public void keyPressed(KeyEvent e) {
 			//JOptionPane.showInternalMessageDialog(null, e.getKeyCode());
 			if(e.getKeyCode() == 37) { //izq
-				int nuevaPosMira = lblMira.getX() - 10;
-				lblMira.setBounds(nuevaPosMira, lblMira.getY(), 125, 125);
-				angulo += 10;
+				
+//				angulo += 5;
+//				double anguloRad = Math.toRadians(angulo - 90);
+//				double tanAng = Math.tan(anguloRad);
+//	
+//				double ady = 484 - lblMira.getY();
+//				double opuesto = ady * Math.abs(tanAng);
+//	
+//				int nuevaPosMira = 420 - (int)opuesto;
+//				int vecesMovido = (angulo - 90) / 5;
+//				lblMira.setBounds(nuevaPosMira - ((int)125/2), lblMira.getY(), 125, 125);
+				angulo += 5;
+				if(angulo > 135) {
+					angulo = 135;
+				}
 			}
 			
 			if(e.getKeyCode() == 39) { //derecha
-				int opuesto = 420;
-				int ady = Math.abs(484 - lblMira.getX()) ; //484 pos de donde sale la bala (centro)
-				angulo = (int) Math.toDegrees((Math.atan(opuesto/ady)));
-				System.out.println(angulo);
-				int nuevaPosMira = lblMira.getX() + 10;
-				lblMira.setBounds(nuevaPosMira, lblMira.getY(), 125, 125);
+//				int opuesto = 420;
+//				int ady = Math.abs(484 - lblMira.getX()) ; //484 pos de donde sale la bala (centro)
+//				angulo = (int) Math.toDegrees((Math.atan(opuesto/ady)));
+//				System.out.println(angulo);
+//				int nuevaPosMira = lblMira.getX() + 10;
+//				lblMira.setBounds(nuevaPosMira, lblMira.getY(), 125, 125);
+				angulo -= 5;
+				if(angulo < 45) {
+					angulo = 45;
+				}
 			}
 			
 			if(e.getKeyCode() == 77) { //letra M

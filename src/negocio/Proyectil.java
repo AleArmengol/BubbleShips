@@ -57,13 +57,17 @@ public class Proyectil {
     	setPosX(nuevaPosX);
     	setPosY(nuevaPosY);
     	
+    //para saber la pos del proy cuando pasa por la mira
+//    	if(posY == 170) {
+//    		System.out.println("posX del Proyectil = " + posX);
+//    	}
+    	
     }
 
     public ObjetivoEnemigo colisione(ArrayList<ObjetivoEnemigo> enems) {
     	if(this.posX > 0 && this.posX < 1000) { //para que no le pegue a los enemigos que estan fuera de la pantalla
 	    	for (ObjetivoEnemigo act : enems) {
 	    		if(this.posY <= act.getPosY() + act.getHeight() && this.posX >= act.getPosX() && this.posX + this.width <= act.getPosX() + act.getWidth() && this.posY > act.getPosY() ) {
-	    			System.out.println("Colisiono");
 	    			this.colisione = true;
 	    			return act;
 	    		}

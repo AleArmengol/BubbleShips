@@ -75,7 +75,7 @@ public class Juego {
 
 	public void reiniciarNivel() {
 
-		return;
+		this.nivelAct = this.getNivelAct();
 	}
 
 
